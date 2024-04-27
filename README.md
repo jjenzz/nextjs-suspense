@@ -15,7 +15,7 @@ Run `npm install`, `npm run dev`, and then:
 
 ### Summary
 
-I'd like to be able to preload data higher up the tree to avoid the spinnageddon that happens in test 1, but in my real world version of this scenario the request depends on URL params for the nested page, and parent layouts cannot access these.
+I'd like to be able to preload data higher up the tree to mimic Test 2 and avoid the spinnageddon that happens in Test 1, but in my real world version of this scenario the request depends on URL params for the nested page, and parent layouts cannot access these.
 
 There was [this proposal](https://x.com/fredkisss/status/1784171488146338000) to use [catch-all segments](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments) but that feels like I'd need to reimplement route handling for the nested routes and would likely become hard to maintain.
 

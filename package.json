@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-layout-waterfall",
+  "name": "nextjs-suspense",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.3"
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "@types/react": "18.3.1",
+    "prettier": "^3.2.5",
+    "typescript": "5.4.5"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 80
   }
 }

@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# nextjs-suspense
 
-## Getting Started
+Run `npm install`, `npm run dev`, and then:
 
-First, run the development server:
+### Test 1
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Hard reload page
+1. Note how the item detail suspends (loading appears)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Test 2
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Update the request delay in `./layout.jsx` to match delay in `./item/[itemId]/page.jsx` (`500`)
+1. Hard reload page
+1. Note loading doesn't appear
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Summary
 
-## Learn More
+I'd like to be able to preload data higher up the tree to avoid the spinnageddon that happens in test 1, but in my real world version of this scenario the request depends on URL params for the nested page, and parent layouts cannot access these.
 
-To learn more about Next.js, take a look at the following resources:
+There was [this proposal](https://x.com/fredkisss/status/1784171488146338000) to use [catch-all segments](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments) but that feels like I'd need to reimplement route handling for the nested routes and would likely become hard to maintain.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The other option is to remove `loading.tsx` altogether but now route transitions hang without feedback, and there doesn't appear to be an ergonomic way to hook into `Link` transitions in order to display a loading indicator of my own.

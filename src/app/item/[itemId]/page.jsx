@@ -19,7 +19,7 @@ const getData = cache(async (id) => {
 });
 
 function isSSRLoad() {
-	return headers().get("accept").includes("text/html");
+	return Boolean(headers().get("accept")?.includes("text/html"));
 }
 
 export default async function Item({ params }) {

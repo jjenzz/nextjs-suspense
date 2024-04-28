@@ -1,4 +1,6 @@
+import { headers } from 'next/headers';
 import { cache } from 'react';
+import * as React from 'react';
 
 const items = [
   { id: '1', name: 'item-one', detail: 'some detail for item one' },
@@ -16,7 +18,21 @@ const getData = cache(async (id) => {
   });
 });
 
+function isSSRLoad() {
+  return Boolean(headers().get('accept')?.includes('text/html'));
+}
+
 export default async function Item({ params }) {
+  return isSSRLoad() ? (
+    <Content params={params} />
+  ) : (
+    <React.Suspense fallback={<p>Loading...</p>}>
+      <Content params={params} />
+    </React.Suspense>
+  );
+}
+
+async function Content({ params }) {
   const response = await getData(params.itemId);
   return (
     <div>

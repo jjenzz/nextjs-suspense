@@ -1,13 +1,13 @@
-import { headers } from "next/headers";
-import { cache } from "react";
-import * as React from "react";
+import { headers } from 'next/headers';
+import { cache } from 'react';
+import * as React from 'react';
 
 const items = [
-	{ id: "1", name: "item-one", detail: "some detail for item one" },
-	{ id: "2", name: "item-two", detail: "some detail for item two" },
-	{ id: "3", name: "item-three", detail: "some detail for item three" },
-	{ id: "4", name: "item-four", detail: "some detail for item four" },
-	{ id: "5", name: "item-five", detail: "some detail for item five" },
+	{ id: '1', name: 'item-one', detail: 'some detail for item one' },
+	{ id: '2', name: 'item-two', detail: 'some detail for item two' },
+	{ id: '3', name: 'item-three', detail: 'some detail for item three' },
+	{ id: '4', name: 'item-four', detail: 'some detail for item four' },
+	{ id: '5', name: 'item-five', detail: 'some detail for item five' },
 ];
 
 const getData = cache(async (id) => {
@@ -19,7 +19,7 @@ const getData = cache(async (id) => {
 });
 
 function isSSRLoad() {
-	return Boolean(headers().get("accept")?.includes("text/html"));
+	return Boolean(headers().get('accept')?.includes('text/html'));
 }
 
 export default async function Item({ params }) {
